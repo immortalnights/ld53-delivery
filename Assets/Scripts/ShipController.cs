@@ -9,7 +9,7 @@ public class ShipController : MonoBehaviour
 
     bool isAccelerating= false;
     bool isBreaking = false;
-    float logTimer = 0f;
+    bool isWebbed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,18 +35,25 @@ public class ShipController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isAccelerating) {
-            rb.velocity += Vector3.right * engine.thrust;
-        } else if (isBreaking) {
-            rb.velocity += Vector3.left * engine.thrust;
-        }
-
-        if (isAccelerating || isBreaking) {
-            logTimer = logTimer + Time.fixedDeltaTime;
-            if (logTimer > 10.0f) {
-                Debug.Log(gameObject.transform.position.y + " : " + logTimer);
-                logTimer = 0.0f;
+        if (!isWebbed) {
+            if (isAccelerating) {
+                rb.velocity += Vector3.right * engine.thrust;
+            } else if (isBreaking) {
+                rb.velocity += Vector3.left * engine.thrust;
+            }
+        } else {
+            if (rb.velocity.magnitude < 2) {
+                Debug.Log("Full stop");
+                rb.velocity = new Vector3(0,0,0);
+                isWebbed = false;
+                rb.drag = 0;
             }
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        isWebbed = true;
+        rb.drag = rb.velocity.magnitude / 4;
     }
 }
