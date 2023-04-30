@@ -5,8 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Skybox))]
 public class SkyboxSetter : MonoBehaviour
 {
-    [SerializeField]
-    List<Material> skyboxMaterials;
+    [SerializeField] private List<Material> skyboxMaterials;
 
     Skybox skybox;
 

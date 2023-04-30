@@ -215,11 +215,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a154c2ab198af914c90b0963c32c2ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contract: {fileID: 11400000, guid: 16ca975d6f8baf5469083cfa1ab04cad, type: 2}
+  contract: {fileID: 0}
   nameField: {fileID: 4178688397517200538}
   destinationField: {fileID: 5243484634697538815}
   paymentField: {fileID: 2200446910120607670}
   deadlineField: {fileID: 688602293036240087}
+  spaceshipChannel: {fileID: 0}
 --- !u!1 &979815269791468557
 GameObject:
   m_ObjectHideFlags: 0
