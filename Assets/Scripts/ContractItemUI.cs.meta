@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a154c2ab198af914c90b0963c32c2ffc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - contract: {instanceID: 0}
+  - nameField: {instanceID: 0}
+  - destinationField: {instanceID: 0}
+  - paymentField: {instanceID: 0}
+  - deadlineField: {instanceID: 0}
+  - ContractChannel: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
