@@ -378,8 +378,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278358791}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -388,7 +388,7 @@ Transform:
   - {fileID: 1381085588}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &278358794
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -513,6 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contactItemPrefab: {fileID: 608649362606997069, guid: 3149c11c5ad63264ab15dbb10eeca133, type: 3}
   scrollViewContent: {fileID: 111739329}
+  contractChannel: {fileID: 11400000, guid: 954f62dba3aa30a4aac2c4174faa119f, type: 2}
 --- !u!1 &536790360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,15 +1196,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6042436924991456750, guid: 7d92e107cecda7d41a2cb31aa7abea7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.1
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 6042436924991456750, guid: 7d92e107cecda7d41a2cb31aa7abea7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.473846
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6042436924991456750, guid: 7d92e107cecda7d41a2cb31aa7abea7c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 83.7
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6042436924991456750, guid: 7d92e107cecda7d41a2cb31aa7abea7c, type: 3}
       propertyPath: m_LocalRotation.w
