@@ -17,9 +17,20 @@ public class StationController : MonoBehaviour
         List<StationController> otherStations = new List<StationController>(FindObjectsOfType<StationController>());
         otherStations.Remove(this);
 
-        const int contractCount = 0;
+        string[] contractNames = new string[] {
+            "Personal Transport",
+            "Passenger Transport",
+            "Resource Delivery",
+            "Mining Equipment Transport",
+            "Electronics Delivery",
+            "Military Hardware Delivery",
+            "Confidential Cargo",
+        };
+
+        const int contractCount = 5;
         for (int i = 0; i < contractCount; i++) {
             ContractScriptableObject contact = ContractScriptableObject.CreateInstance<ContractScriptableObject>();
+            contact.contactName = contractNames[Random.Range(0, contractNames.Length)];
             contact.destination = otherStations[Random.Range(0, otherStations.Count)];
             contact.deadline = Random.Range(3, 12);
             contact.payment = 1500 - Mathf.FloorToInt(contact.deadline) * 100;

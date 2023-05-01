@@ -142,6 +142,17 @@ public class SpaceshipController : MonoBehaviour
             state = State.Docking;
             location = station;
             body.drag = body.velocity.magnitude / 4;
+
+            float dockingSpeed = body.velocity.magnitude;
+            if (dockingSpeed > 100f) {
+                properties.credits -= 1000;
+            } else if (dockingSpeed > 100f) {
+                properties.credits -= 500;
+            } else if (dockingSpeed > 50f) {
+                properties.credits -= 250;
+            } else if (dockingSpeed > 10f) {
+                properties.credits -= 100;
+            }
         }
     }
 
