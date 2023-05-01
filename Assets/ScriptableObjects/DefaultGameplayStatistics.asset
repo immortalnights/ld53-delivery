@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38304bea6e96bce448b8b2e253880b72, type: 3}
-  m_Name: SpaceshipProperties
+  m_Script: {fileID: 11500000, guid: 5cb83956777bcf542b88f0b41201b18e, type: 3}
+  m_Name: DefaultGameplayStatistics
   m_EditorClassIdentifier: 
-  credits: 0
-  fuel: 973.75
+  contractsCompleted: 0
+  distanceTraveled: 0
+  fuelConsumed: 0

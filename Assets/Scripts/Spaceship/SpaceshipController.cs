@@ -21,7 +21,11 @@ public class SpaceshipController : MonoBehaviour
 
     [SerializeField] private SpaceshipChannelSO channel;
 
+    [SerializeField] private VoidEventChannelSO gameOverChannel;
+
     [SerializeField] private SpaceshipPropertiesSO properties;
+
+    [SerializeField] private GameplayStatisticsSO gameplayStatistics;
 
     private Rigidbody body;
 
@@ -40,6 +44,17 @@ public class SpaceshipController : MonoBehaviour
         body = GetComponent<Rigidbody>();
         channel.AcceptContractAction += HandleAcceptContract;
         channel.DockAction += HandleDocked;
+
+        properties.Reset();
+        gameplayStatistics.Reset();
+
+        StationController[] stations = FindObjectsOfType<StationController>();
+        foreach(StationController station in stations) {
+            if (station.name == "Station Alpha") {
+                transform.LookAt(station.transform);
+                break;
+            }
+        }
     }
 
     void Update()
@@ -93,8 +108,15 @@ public class SpaceshipController : MonoBehaviour
         if (activeContract != null) {
             if (activeContract.destination == station) {
                 Debug.Log("Contract completed");
+                // TODO Use Event
+                gameplayStatistics.contractsCompleted += 1;
                 properties.credits += activeContract.payment;
                 activeContract = null;
+
+                if (station.contracts.Count == 0) {
+                    Debug.Log("Station has no contracts, game over");
+                    gameOverChannel.RaiseEvent();
+                }
             } else {
                 Debug.Log("Incorrect station for contract");
             }

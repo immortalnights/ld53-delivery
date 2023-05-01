@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/Channels/SpaceshipChannel")]
+[CreateAssetMenu(menuName = "Events/Spaceship Channel")]
 public class SpaceshipChannelSO : ScriptableObject
 {
     public event UnityAction<StationController> DockAction;

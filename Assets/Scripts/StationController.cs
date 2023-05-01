@@ -4,26 +4,35 @@ using UnityEngine;
 
 public class StationController : MonoBehaviour
 {
+    [SerializeField] private SpaceshipChannelSO channel;
+
+    [SerializeField] private VoidEventChannelSO gameOverChannel;
+
     public List<ContractScriptableObject> contracts;
 
-    // Start is called before the first frame update
     void Start()
     {
+        channel.AcceptContractAction += HandleAcceptContract;
+
         List<StationController> otherStations = new List<StationController>(FindObjectsOfType<StationController>());
         otherStations.Remove(this);
 
-        for (int i = 0; i < 5; i++) {
+        const int contractCount = 0;
+        for (int i = 0; i < contractCount; i++) {
             ContractScriptableObject contact = ContractScriptableObject.CreateInstance<ContractScriptableObject>();
             contact.destination = otherStations[Random.Range(0, otherStations.Count)];
-            contact.payment = 1000;
-            contact.deadline = 10;
+            contact.deadline = Random.Range(3, 12);
+            contact.payment = 1500 - Mathf.FloorToInt(contact.deadline) * 100;
             contracts.Add(contact);
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
+    }
 
+    void HandleAcceptContract(ContractScriptableObject acceptedContract)
+    {
+        contracts.Remove(acceptedContract);
     }
 }

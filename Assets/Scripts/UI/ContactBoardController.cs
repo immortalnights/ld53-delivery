@@ -14,9 +14,8 @@ public class ContactBoardController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start...");
-        spaceshipChannel.DockAction += HandleSpaceshipDocked;
-        spaceshipChannel.AcceptContractAction += HandleAcceptContract;
+        // spaceshipChannel.DockAction += HandleSpaceshipDocked;
+        // spaceshipChannel.AcceptContractAction += HandleAcceptContract;
     }
 
     // Update is called once per frame
@@ -25,7 +24,18 @@ public class ContactBoardController : MonoBehaviour
 
     }
 
-    private void RenderContacts(List<ContractScriptableObject> contracts)
+    void OnEnable()
+    {
+
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("Clear contracts");
+        ClearContracts();
+    }
+
+    public void RenderContacts(List<ContractScriptableObject> contracts)
     {
         Debug.LogFormat("Render {0} contracts", contracts.Count);
 
@@ -40,25 +50,24 @@ public class ContactBoardController : MonoBehaviour
 
     private void ClearContracts()
     {
-        Debug.LogFormat("scroll view has {0} children", scrollViewContent.childCount);
         while (scrollViewContent.childCount > 0) {
             Object.DestroyImmediate(scrollViewContent.GetChild(0).gameObject);
         }
     }
 
-    void HandleSpaceshipDocked(StationController station)
-    {
-        Debug.Log("UI handle docked");
-        gameObject.SetActive(true);
-        RenderContacts(station.contracts);
-    }
+    // void HandleSpaceshipDocked(StationController station)
+    // {
+    //     Debug.Log("UI handle docked");
+    //     // gameObject.SetActive(true);
+    //     RenderContacts(station.contracts);
+    // }
 
-    void HandleAcceptContract(ContractScriptableObject contract)
-    {
-        Debug.Log("UI accept contract");
-        gameObject.SetActive(false);
-        ClearContracts();
-    }
+    // void HandleAcceptContract(ContractScriptableObject contract)
+    // {
+    //     Debug.Log("UI accept contract");
+    //     // gameObject.SetActive(false);
+    //     ClearContracts();
+    // }
 
     public void HandleClose()
     {
