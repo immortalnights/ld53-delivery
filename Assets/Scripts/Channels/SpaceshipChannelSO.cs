@@ -9,6 +9,8 @@ public class SpaceshipChannelSO : ScriptableObject
     public event UnityAction<StationController> DockAction;
     public event UnityAction<ContractScriptableObject> AcceptContractAction;
 
+    public event UnityAction<float> RefuelAction;
+
     // Invoked when the Spaceship (player) docks at a station
     public void Docked(StationController station)
     {
@@ -20,5 +22,10 @@ public class SpaceshipChannelSO : ScriptableObject
     public void AcceptContract(ContractScriptableObject contract)
     {
         AcceptContractAction.Invoke(contract);
+    }
+
+    public void Refuel(float amount)
+    {
+        RefuelAction.Invoke(amount);
     }
 }

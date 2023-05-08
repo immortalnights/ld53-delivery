@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ContactBoardController : MonoBehaviour
+public class ContractUIController : MonoBehaviour
 {
     [SerializeField] private GameObject contactItemPrefab;
 
     [SerializeField] private Transform scrollViewContent;
 
     [SerializeField] private SpaceshipChannelSO spaceshipChannel = default;
+
+    [SerializeField] private StationScreenChannelSO stationScreenChannel;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +36,6 @@ public class ContactBoardController : MonoBehaviour
         Debug.Log("Clear contracts");
         ClearContracts();
     }
-
     public void RenderContacts(List<ContractScriptableObject> contracts)
     {
         Debug.LogFormat("Render {0} contracts", contracts.Count);
@@ -42,11 +43,12 @@ public class ContactBoardController : MonoBehaviour
         foreach(ContractScriptableObject contract in contracts) {
             Debug.Log("Create contract ui");
             GameObject obj = Instantiate(contactItemPrefab, scrollViewContent);
-            ContractItemUI ui = obj.GetComponent<ContractItemUI>();
+            ContractItem ui = obj.GetComponent<ContractItem>();
             ui.spaceshipChannel = spaceshipChannel;
-            ui.GetComponent<ContractItemUI>().SetContract(contract);
+            ui.GetComponent<ContractItem>().SetContract(contract);
         }
     }
+
 
     private void ClearContracts()
     {
@@ -71,8 +73,6 @@ public class ContactBoardController : MonoBehaviour
 
     public void HandleClose()
     {
-        Debug.Log("UI handle close");
-        gameObject.SetActive(false);
-        ClearContracts();
+        stationScreenChannel.Invoke(Screen.Root);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private HudController hud;
-    [SerializeField] private ContactBoardController contactBoard;
+    [SerializeField] private StationUIController stationPanel;
     [SerializeField] private GameOverPanelController gameOverPanel;
 
 	[Header("Listening to")]
@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour
         gameOverChannel.OnEventRaised += HandleGameOver;
 
         hud.gameObject.SetActive(true);
-        contactBoard.gameObject.SetActive(false);
+        stationPanel.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
     }
 
@@ -29,14 +29,13 @@ public class UIController : MonoBehaviour
         if (station.contracts.Count == 0) {
             gameOverPanel.gameObject.SetActive(true);
         } else {
-            contactBoard.gameObject.SetActive(true);
-            contactBoard.RenderContacts(station.contracts);
+            stationPanel.SetStation(station);
         }
     }
 
     private void HandleAcceptContract(ContractScriptableObject contract)
     {
-        contactBoard.gameObject.SetActive(false);
+        stationPanel.ClearStation();
     }
 
     private void HandleGameOver()

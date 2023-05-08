@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class ContractItemUI : MonoBehaviour
+public class ContractItem : MonoBehaviour
 {
     [SerializeField] private ContractScriptableObject contract;
 

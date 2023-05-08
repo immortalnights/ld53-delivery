@@ -17,15 +17,16 @@ enum Direction {
 
 public class SpaceshipController : MonoBehaviour
 {
+
     [SerializeField] private EngineScriptableObject engine;
-
-    [SerializeField] private SpaceshipChannelSO channel;
-
-    [SerializeField] private VoidEventChannelSO gameOverChannel;
-
     [SerializeField] private SpaceshipPropertiesSO properties;
 
     [SerializeField] private GameplayStatisticsSO gameplayStatistics;
+
+    [Header("Listening to...")]
+    [SerializeField] private SpaceshipChannelSO channel;
+
+    [SerializeField] private VoidEventChannelSO gameOverChannel;
 
     private Rigidbody body;
 
@@ -44,6 +45,7 @@ public class SpaceshipController : MonoBehaviour
         body = GetComponent<Rigidbody>();
         channel.AcceptContractAction += HandleAcceptContract;
         channel.DockAction += HandleDocked;
+        channel.RefuelAction += HandleRefuel;
 
         properties.Reset();
         gameplayStatistics.Reset();
@@ -92,17 +94,24 @@ public class SpaceshipController : MonoBehaviour
                 break;
             }
             case State.Traveling: {
-                if (direction == Direction.Forwards) {
-                    properties.fuel -= 0.25f;
-                    body.velocity += transform.rotation * Vector3.forward * engine.thrust;
-                } else if (direction == Direction.Backwards) {
-                    properties.fuel -= 0.25f;
-                    body.velocity += transform.rotation * Vector3.back * engine.thrust;
+                if (properties.fuel > 0) {
+                    if (direction == Direction.Forwards) {
+                        properties.fuel -= 0.25f;
+                        body.velocity += transform.rotation * Vector3.forward * engine.thrust;
+                    } else if (direction == Direction.Backwards) {
+                        properties.fuel -= 0.25f;
+                        body.velocity += transform.rotation * Vector3.back * engine.thrust;
+                    }
+                } else {
+                    // Display emergency fuel dialog
+                    // If the player cannot afford it, game over.
+                    gameOverChannel.RaiseEvent(/* OutOfFuel */);
                 }
                 break;
             }
         }
     }
+
     void HandleDocked(StationController station)
     {
         if (activeContract != null) {
@@ -132,6 +141,25 @@ public class SpaceshipController : MonoBehaviour
         state = State.Idle;
         location = null;
         transform.LookAt(activeContract.destination.gameObject.transform);
+    }
+
+    void HandleRefuel(float amount)
+    {
+        const int fuelUnitCost = 1;
+
+        Debug.LogFormat("refuelRequested {0}", amount);
+        float refuelRequired = Mathf.Min(properties.maximumFuel * amount, properties.maximumFuel - properties.fuel);
+        Debug.LogFormat("refuelRequired {0}", refuelRequired);
+        float canAfford = Mathf.Floor(properties.credits / fuelUnitCost);
+        Debug.LogFormat("canAfford {0}", canAfford);
+        float refuelAmount = Mathf.Min(canAfford, refuelRequired);
+        Debug.LogFormat("refuelAmount {0}", refuelAmount);
+
+        Debug.LogFormat("current fuel {0}", properties.fuel);
+        properties.credits -= Mathf.CeilToInt(refuelAmount * fuelUnitCost);
+        properties.fuel += refuelAmount;
+        Debug.LogFormat("fuel {0}", properties.fuel);
+        // TODO some UI notification
     }
 
     void OnTriggerEnter(Collider other)

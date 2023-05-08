@@ -6,11 +6,14 @@ using UnityEngine;
 public class SpaceshipPropertiesSO : ScriptableObject
 {
     public int credits = 0;
-    public float fuel = 1000;
+    public float fuel = 0f;
+
+    public float maximumFuel = 0f;
 
     public void Reset()
     {
-        credits = 0;
-        fuel = 1000;
+        credits = 100000;
+        fuel = 20;
+        maximumFuel = 100f;
     }
 }
