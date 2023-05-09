@@ -70,6 +70,7 @@ public class StationUIController : MonoBehaviour
     public void SetStation(StationController s)
     {
         station = s;
+        contractScreen.RenderContacts(s.contracts);
         ChangeScreen(Screen.Root);
     }
 
