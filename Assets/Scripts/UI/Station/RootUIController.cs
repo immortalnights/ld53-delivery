@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class RootUIController : MonoBehaviour
 {
-    [SerializeField] private Transform fuelButton;
-    [SerializeField] private Transform contractButton;
+  [SerializeField] private Transform fuelButton;
+  [SerializeField] private Transform contractButton;
 
-    [SerializeField] private StationScreenChannelSO stationScreenChannel;
+  [SerializeField] private StationScreenChannelSO stationScreenChannel;
 
-    public void OnClickContract()
-    {
-        stationScreenChannel.Invoke(Screen.Contract);
-    }
+  public void OnClickContract()
+  {
+    stationScreenChannel.Invoke(Screen.Contract);
+  }
 
-    public void OnClickFuel()
-    {
-        stationScreenChannel.Invoke(Screen.Fuel);
-    }
+  public void OnClickFuel()
+  {
+    stationScreenChannel.Invoke(Screen.Fuel);
+  }
 }

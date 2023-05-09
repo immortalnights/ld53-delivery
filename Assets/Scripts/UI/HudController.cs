@@ -25,11 +25,16 @@ public class HudController : MonoBehaviour
   {
     speedValue.text = spaceship.Speed.ToString();
 
-    if (spaceship.Speed == 0) {
+    if (spaceship.Speed == 0)
+    {
       speedValue.color = Color.gray;
-    } else if (spaceship.Speed < 12) {
+    }
+    else if (spaceship.Speed < 12)
+    {
       speedValue.color = Color.green;
-    } else {
+    }
+    else
+    {
       speedValue.color = Color.red;
     }
 

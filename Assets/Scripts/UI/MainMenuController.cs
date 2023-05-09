@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public void HandleNewGameClick()
-    {
-        // newGameEvent.RaiseEvent();
-        SceneManager.LoadScene("Gameplay");
-    }
+  public void HandleNewGameClick()
+  {
+    // newGameEvent.RaiseEvent();
+    SceneManager.LoadScene("Gameplay");
+  }
 
-    public void HandleExitClick()
-    {
-        Application.Quit();
-    }
+  public void HandleExitClick()
+  {
+    Application.Quit();
+  }
 }
