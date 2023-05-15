@@ -6,51 +6,51 @@ using TMPro;
 
 public class ContractItem : MonoBehaviour
 {
-  [SerializeField] private ContractScriptableObject contract;
+    [SerializeField] private ContractScriptableObject contract;
 
-  [SerializeField] private TMP_Text nameField;
+    [SerializeField] private TMP_Text nameField;
 
-  [SerializeField] private TMP_Text destinationField;
+    [SerializeField] private TMP_Text destinationField;
 
-  [SerializeField] private TMP_Text paymentField;
+    [SerializeField] private TMP_Text paymentField;
 
-  [SerializeField] private TMP_Text deadlineField;
+    [SerializeField] private TMP_Text deadlineField;
 
-  // Set when instantiated
-  public SpaceshipChannelSO spaceshipChannel = default;
+    // Set when instantiated
+    [SerializeField] public ContractChannelSO _contactChannel;
 
-  public void Awake()
-  {
-  }
-
-  public void OnEnable()
-  {
-    if (contract)
+    public void Awake()
     {
-      RenderContract();
     }
-  }
 
-  public void HandleAcceptContract()
-  {
-    Debug.Log("Accept Contract");
-    spaceshipChannel.AcceptContract(contract);
-  }
-
-  public void SetContract(ContractScriptableObject newContract)
-  {
-    contract = newContract;
-    RenderContract();
-  }
-
-  private void RenderContract()
-  {
-    nameField.text = contract.contactName;
-    if (contract.destination)
+    public void OnEnable()
     {
-      destinationField.text = contract.destination.name;
+        if (contract)
+        {
+            RenderContract();
+        }
     }
-    paymentField.text = contract.payment.ToString();
-    deadlineField.text = contract.deadline.ToString();
-  }
+
+    public void HandleAcceptContract()
+    {
+        Debug.Log("Accept Contract");
+        _contactChannel.AcceptContract(contract);
+    }
+
+    public void SetContract(ContractScriptableObject newContract)
+    {
+        contract = newContract;
+        RenderContract();
+    }
+
+    private void RenderContract()
+    {
+        nameField.text = contract.contactName;
+        if (contract.destination)
+        {
+            destinationField.text = contract.destination.name;
+        }
+        paymentField.text = contract.payment.ToString();
+        deadlineField.text = contract.deadline.ToString() + " Days";
+    }
 }

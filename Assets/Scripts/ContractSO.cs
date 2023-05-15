@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,4 +11,6 @@ public class ContractScriptableObject : ScriptableObject
   public int payment;
   // Time to complete the contact
   public float deadline;
+
+  public DateTime acceptedTime;
 }

@@ -5,55 +5,42 @@ using UnityEngine;
 
 public class HudController : MonoBehaviour
 {
-  [SerializeField] private TMP_Text dateValue;
-  [SerializeField] private TMP_Text creditsValue;
-  [SerializeField] private TMP_Text fuelValue;
-  [SerializeField] private TMP_Text speedValue;
+    [SerializeField] private TMP_Text dateValue;
+    [SerializeField] private TMP_Text creditsValue;
+    [SerializeField] private TMP_Text fuelValue;
+    [SerializeField] private TMP_Text speedValue;
 
-  private SpaceshipController spaceship;
+    private SpaceshipController spaceship;
 
-  [SerializeField] private UniverseTimeSO universeTime = default;
+    [SerializeField] private UniverseTimeSO universeTime = default;
 
-  [SerializeField] private SpaceshipChannelSO spaceshipChannel = default;
-  [SerializeField] private SpaceshipPropertiesSO spaceshipProperties;
+    [SerializeField] private SpaceshipPropertiesSO spaceshipProperties;
 
-  void Start()
-  {
-    spaceshipChannel.DockAction += HandleDocked;
-    spaceshipChannel.AcceptContractAction += HandleAcceptContract;
-    spaceship = FindFirstObjectByType<SpaceshipController>();
-    Debug.Assert(spaceship != null, "Failed to find Spaceship(Controller)");
-  }
-
-  void Update()
-  {
-    dateValue.text = universeTime.Format();
-    speedValue.text = spaceship.Speed.ToString();
-
-    if (spaceship.Speed == 0)
+    void Start()
     {
-      speedValue.color = Color.gray;
-    }
-    else if (spaceship.Speed < 12)
-    {
-      speedValue.color = Color.green;
-    }
-    else
-    {
-      speedValue.color = Color.red;
+        spaceship = FindFirstObjectByType<SpaceshipController>();
+        Debug.Assert(spaceship != null, "Failed to find Spaceship(Controller)");
     }
 
-    creditsValue.text = spaceshipProperties.credits.ToString();
-    fuelValue.text = Mathf.FloorToInt(spaceshipProperties.fuel).ToString();
-  }
+    void Update()
+    {
+        dateValue.text = universeTime.Format();
+        speedValue.text = spaceship.Speed.ToString();
 
-  private void HandleDocked(StationController station)
-  {
-    gameObject.SetActive(false);
-  }
+        if (spaceship.Speed == 0)
+        {
+            speedValue.color = Color.gray;
+        }
+        else if (spaceship.Speed < 12)
+        {
+            speedValue.color = Color.green;
+        }
+        else
+        {
+            speedValue.color = Color.red;
+        }
 
-  private void HandleAcceptContract(ContractScriptableObject contract)
-  {
-    gameObject.SetActive(true);
-  }
+        creditsValue.text = spaceshipProperties.credits.ToString();
+        fuelValue.text = Mathf.FloorToInt(spaceshipProperties.fuel).ToString();
+    }
 }

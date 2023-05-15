@@ -1,20 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-  [SerializeField] private UniverseTimeSO universeTime;
+    [SerializeField] private UniverseTimeSO _universeTime;
 
-  // Start is called before the first frame update
-  void Start()
-  {
+    private ContractManager _contractManager;
 
-  }
+    void Start()
+    {
+        _contractManager = GetComponent<ContractManager>();
+        // _universeTime.HourAction += (DateTime date) => Debug.Log("Hour");
+        _universeTime.DayAction += (DateTime date) => Debug.Log("Day");
+        _universeTime.YearAction += (DateTime date) => Debug.Log("Year");
+    }
 
-  // Update is called once per frame
-  void Update()
-  {
-    universeTime.Tick(Time.deltaTime);
-  }
+    void Update()
+    {
+        _universeTime.Tick(Time.deltaTime);
+    }
+
+    public DateTime Date
+    {
+        get => _universeTime.Date;
+    }
 }
