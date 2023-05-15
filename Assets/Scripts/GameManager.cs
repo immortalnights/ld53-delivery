@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+  [SerializeField] private UniverseTimeSO universeTime;
 
   // Start is called before the first frame update
   void Start()
@@ -14,6 +15,6 @@ public class GameManager : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-
+    universeTime.Tick(Time.deltaTime);
   }
 }

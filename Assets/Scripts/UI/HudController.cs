@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class HudController : MonoBehaviour
 {
+  [SerializeField] private TMP_Text dateValue;
   [SerializeField] private TMP_Text creditsValue;
   [SerializeField] private TMP_Text fuelValue;
   [SerializeField] private TMP_Text speedValue;
 
   private SpaceshipController spaceship;
+
+  [SerializeField] private UniverseTimeSO universeTime = default;
+
   [SerializeField] private SpaceshipChannelSO spaceshipChannel = default;
   [SerializeField] private SpaceshipPropertiesSO spaceshipProperties;
 
@@ -23,6 +27,7 @@ public class HudController : MonoBehaviour
 
   void Update()
   {
+    dateValue.text = universeTime.Format();
     speedValue.text = spaceship.Speed.ToString();
 
     if (spaceship.Speed == 0)
