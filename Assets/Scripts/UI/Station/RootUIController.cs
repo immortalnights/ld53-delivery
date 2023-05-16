@@ -5,8 +5,21 @@ using UnityEngine;
 public class RootUIController : MonoBehaviour
 {
     [SerializeField] private StationScreenChannelSO _stationScreenChannel;
-    [SerializeField] private SpaceshipChannelSO _spaceshipChannel = default;
+    [SerializeField] private SpaceshipChannelSO _spaceshipChannel;
 
+    [SerializeField] private Transform _undockButton;
+
+    [SerializeField] private ContractChannelSO _contractChannel;
+
+    void Start()
+    {
+        // _undockButton.gameObject.SetActive(false);
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("enable?");
+    }
 
     public void OnClickContract()
     {

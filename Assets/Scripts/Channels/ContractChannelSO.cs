@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "Events/Contact Channel")]
+[CreateAssetMenu(menuName = "Events/Contract Channel")]
 public class ContractChannelSO : ScriptableObject
 {
     public event UnityAction<ContractScriptableObject> AcceptContractAction;
-    public event UnityAction<ContractScriptableObject, SpaceshipController> AssignContractAction;
+    public event UnityAction<ContractScriptableObject, SpaceshipController> AssignedContractAction;
     public event UnityAction<ContractScriptableObject, SpaceshipController> CompleteContractAction;
     public event UnityAction<ContractScriptableObject, SpaceshipController> FailContractAction;
     public event UnityAction<ContractScriptableObject, SpaceshipController> CancelContractAction;
@@ -17,23 +17,39 @@ public class ContractChannelSO : ScriptableObject
         AcceptContractAction.Invoke(contract);
     }
 
-    public void AssignContract(ContractScriptableObject contract, SpaceshipController spaceship)
+    public void CheckContract(ContractScriptableObject contract, SpaceshipController spaceship, StationController station)
     {
-        AssignContractAction.Invoke(contract, spaceship);
     }
 
-    public void CompleteContract(ContractScriptableObject contract, SpaceshipController spaceship)
+    public void AssignContract(ContractScriptableObject contract, SpaceshipController spaceship)
     {
-        CompleteContractAction.Invoke(contract, spaceship);
+        if (AssignedContractAction != null)
+        {
+            AssignedContractAction.Invoke(contract, spaceship);
+        }
+    }
+
+    public void CompleteContract(ContractScriptableObject contract, SpaceshipController spaceship, StationController station)
+    {
+        if (CompleteContractAction != null)
+        {
+            CompleteContractAction.Invoke(contract, spaceship);
+        }
     }
 
     public void FailContract(ContractScriptableObject contract, SpaceshipController spaceship)
     {
-        FailContractAction.Invoke(contract, spaceship);
+        if (FailContractAction != null)
+        {
+            FailContractAction.Invoke(contract, spaceship);
+        }
     }
 
     public void CancelContract(ContractScriptableObject contract, SpaceshipController spaceship)
     {
-        CancelContractAction.Invoke(contract, spaceship);
+        if (CancelContractAction != null)
+        {
+            CancelContractAction.Invoke(contract, spaceship);
+        }
     }
 }

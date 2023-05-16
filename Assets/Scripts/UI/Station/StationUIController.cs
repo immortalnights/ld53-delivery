@@ -18,13 +18,16 @@ public class StationUIController : MonoBehaviour
     [SerializeField] private FuelUIController fuelScreen;
     [SerializeField] private ContractUIController contractScreen;
 
-    private StationController station;
+
+    private StationController _station;
 
     [SerializeField] private StationScreenChannelSO stationScreenChannel;
+    [SerializeField] private ContractChannelSO _contractChannel;
 
     void Start()
     {
         stationScreenChannel.ChangeScreenAction += ChangeScreen;
+        _contractChannel.AssignedContractAction += HandleAssignedContract;
     }
 
     private void OnValidate()
@@ -56,6 +59,11 @@ public class StationUIController : MonoBehaviour
                 }
             case Screen.Contract:
                 {
+                    if (_station)
+                    {
+                        contractScreen.RenderContracts(_station.contracts);
+                    }
+
                     gameObject.SetActive(true);
                     rootScreen.gameObject.SetActive(false);
                     contractScreen.gameObject.SetActive(true);
@@ -75,14 +83,19 @@ public class StationUIController : MonoBehaviour
 
     public void SetStation(StationController s)
     {
-        station = s;
-        contractScreen.RenderContacts(s.contracts);
+        _station = s;
         ChangeScreen(Screen.Root);
     }
 
     public void ClearStation()
     {
-        station = null;
+        _station = null;
         ChangeScreen(Screen.None);
+    }
+
+    void HandleAssignedContract(ContractScriptableObject contract, SpaceshipController spaceship)
+    {
+        // Re-render contract board
+        contractScreen.RenderContracts(_station.contracts);
     }
 }

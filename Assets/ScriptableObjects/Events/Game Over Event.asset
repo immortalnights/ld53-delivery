@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a00ed32689ca64b99dddd5f8578812, type: 3}
-  m_Name: DefaultEngine
+  m_Script: {fileID: 11500000, guid: a891247021043f04da3a397383670db7, type: 3}
+  m_Name: Game Over Event
   m_EditorClassIdentifier: 
-  thrust: 1
-  speed: 0

@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class ContractUIController : MonoBehaviour
 {
-    [SerializeField] private GameObject contactItemPrefab;
+
+    [SerializeField] private GameObject _contractItemPrefab;
 
     [SerializeField] private Transform scrollViewContent;
 
-    [SerializeField] private ContractChannelSO _contactChannel;
+    [SerializeField] private ContractChannelSO _contractChannel;
 
     [SerializeField] private StationScreenChannelSO stationScreenChannel;
 
@@ -32,20 +33,21 @@ public class ContractUIController : MonoBehaviour
         Debug.Log("Clear contracts");
         ClearContracts();
     }
-    public void RenderContacts(List<ContractScriptableObject> contracts)
+
+    public void RenderContracts(List<ContractScriptableObject> contracts)
     {
         Debug.LogFormat("Render {0} contracts", contracts.Count);
 
+        ClearContracts();
         foreach (ContractScriptableObject contract in contracts)
         {
             Debug.Log("Create contract UI");
-            GameObject obj = Instantiate(contactItemPrefab, scrollViewContent);
+            GameObject obj = Instantiate(_contractItemPrefab, scrollViewContent);
             ContractItem ui = obj.GetComponent<ContractItem>();
-            ui._contactChannel = _contactChannel;
+            ui._contractChannel = _contractChannel;
             ui.GetComponent<ContractItem>().SetContract(contract);
         }
     }
-
 
     private void ClearContracts()
     {
@@ -54,20 +56,6 @@ public class ContractUIController : MonoBehaviour
             Object.DestroyImmediate(scrollViewContent.GetChild(0).gameObject);
         }
     }
-
-    // void HandleSpaceshipDocked(StationController station)
-    // {
-    //     Debug.Log("UI handle docked");
-    //     // gameObject.SetActive(true);
-    //     RenderContacts(station.contracts);
-    // }
-
-    // void HandleAcceptContract(ContractScriptableObject contract)
-    // {
-    //     Debug.Log("UI accept contract");
-    //     // gameObject.SetActive(false);
-    //     ClearContracts();
-    // }
 
     public void HandleClose()
     {

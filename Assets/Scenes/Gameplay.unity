@@ -1256,6 +1256,7 @@ MonoBehaviour:
   fuelScreen: {fileID: 1087681646}
   contractScreen: {fileID: 1163945167}
   stationScreenChannel: {fileID: 11400000, guid: 84443cc43e16daa469b36baa8f0fe67a, type: 2}
+  _contractChannel: {fileID: 11400000, guid: ac3f7d36d13d1c248a7324d188dcd3d7, type: 2}
 --- !u!1 &395557839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,6 +1624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _contractChannel: {fileID: 11400000, guid: ac3f7d36d13d1c248a7324d188dcd3d7, type: 2}
+  _spaceshipChannel: {fileID: 11400000, guid: d4498d5dbb536074ca9915a05bbd6f5f, type: 2}
 --- !u!1 &505221317
 GameObject:
   m_ObjectHideFlags: 0
@@ -4489,11 +4491,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d69594190143274e8d0a63ee274f2b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hud: {fileID: 126643010}
-  stationPanel: {fileID: 319515186}
-  gameOverPanel: {fileID: 1510621351}
+  _hudPanel: {fileID: 126643010}
+  _stationPanel: {fileID: 319515186}
+  _gameOverPanel: {fileID: 1510621351}
   _spaceshipChannel: {fileID: 11400000, guid: d4498d5dbb536074ca9915a05bbd6f5f, type: 2}
-  gameOverChannel: {fileID: 11400000, guid: 66a83ab05d1bf1a4b85cabfe614691f6, type: 2}
+  _gameOverEvent: {fileID: 11400000, guid: 66a83ab05d1bf1a4b85cabfe614691f6, type: 2}
 --- !u!1 &1038985942
 GameObject:
   m_ObjectHideFlags: 0
@@ -5335,9 +5337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29eac02076bc0f445a5fc9501c7e933d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contactItemPrefab: {fileID: 608649362606997069, guid: 3149c11c5ad63264ab15dbb10eeca133, type: 3}
+  _contractItemPrefab: {fileID: 608649362606997069, guid: 3149c11c5ad63264ab15dbb10eeca133, type: 3}
   scrollViewContent: {fileID: 111739329}
-  _contactChannel: {fileID: 11400000, guid: ac3f7d36d13d1c248a7324d188dcd3d7, type: 2}
+  _contractChannel: {fileID: 11400000, guid: ac3f7d36d13d1c248a7324d188dcd3d7, type: 2}
   stationScreenChannel: {fileID: 11400000, guid: 84443cc43e16daa469b36baa8f0fe67a, type: 2}
 --- !u!1 &1199933025
 GameObject:

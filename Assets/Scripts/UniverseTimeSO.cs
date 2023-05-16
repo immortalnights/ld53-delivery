@@ -18,6 +18,7 @@ public class UniverseTimeSO : ScriptableObject
 
     void OnEnable()
     {
+        _gameSpeed = 1;
         _date = new DateTime(2261, 5, 1, 12, 0, 0);
     }
 
@@ -28,7 +29,7 @@ public class UniverseTimeSO : ScriptableObject
 
     public DateTime Tick(float delta)
     {
-        _interval += (delta * _gameSpeed);
+        _interval += (_gameSpeed * delta);
         while (_interval > 1)
         {
             _interval -= 1;

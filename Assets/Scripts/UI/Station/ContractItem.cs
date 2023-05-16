@@ -6,7 +6,11 @@ using TMPro;
 
 public class ContractItem : MonoBehaviour
 {
-    [SerializeField] private ContractScriptableObject contract;
+    public ContractScriptableObject contract
+    {
+        get;
+        private set;
+    }
 
     [SerializeField] private TMP_Text nameField;
 
@@ -17,7 +21,7 @@ public class ContractItem : MonoBehaviour
     [SerializeField] private TMP_Text deadlineField;
 
     // Set when instantiated
-    [SerializeField] public ContractChannelSO _contactChannel;
+    [SerializeField] public ContractChannelSO _contractChannel;
 
     public void Awake()
     {
@@ -34,7 +38,7 @@ public class ContractItem : MonoBehaviour
     public void HandleAcceptContract()
     {
         Debug.Log("Accept Contract");
-        _contactChannel.AcceptContract(contract);
+        _contractChannel.AcceptContract(contract);
     }
 
     public void SetContract(ContractScriptableObject newContract)
@@ -45,7 +49,7 @@ public class ContractItem : MonoBehaviour
 
     private void RenderContract()
     {
-        nameField.text = contract.contactName;
+        nameField.text = contract.contractName;
         if (contract.destination)
         {
             destinationField.text = contract.destination.name;

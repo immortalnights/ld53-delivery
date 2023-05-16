@@ -6,11 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable Objects/Contract")]
 public class ContractScriptableObject : ScriptableObject
 {
-  public string contactName;
-  public StationController destination;
-  public int payment;
-  // Time to complete the contact
-  public float deadline;
+    public string contractName;
+    public StationController destination;
+    public int payment;
+    // Time to complete the contract
+    public float deadline;
 
-  public DateTime acceptedTime;
+    public DateTime acceptedTime;
 }

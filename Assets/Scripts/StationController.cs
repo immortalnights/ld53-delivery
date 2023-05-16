@@ -6,13 +6,16 @@ public class StationController : MonoBehaviour
 {
     [SerializeField] private ContractChannelSO _contractChannel;
 
-    [SerializeField] private VoidEventChannelSO gameOverChannel;
-
-    public List<ContractScriptableObject> contracts;
+    public List<ContractScriptableObject> contracts
+    {
+        get;
+        private set;
+    }
 
     void Start()
     {
-        _contractChannel.AcceptContractAction += HandleAcceptContract;
+        contracts = new List<ContractScriptableObject>();
+        _contractChannel.AssignedContractAction += HandleAssignedContract;
 
         List<StationController> otherStations = new List<StationController>(FindObjectsOfType<StationController>());
         otherStations.Remove(this);
@@ -30,12 +33,12 @@ public class StationController : MonoBehaviour
         const int contractCount = 5;
         for (int i = 0; i < contractCount; i++)
         {
-            ContractScriptableObject contact = ContractScriptableObject.CreateInstance<ContractScriptableObject>();
-            contact.contactName = contractNames[Random.Range(0, contractNames.Length)];
-            contact.destination = otherStations[Random.Range(0, otherStations.Count)];
-            contact.deadline = Random.Range(3, 12);
-            contact.payment = 1500 - Mathf.FloorToInt(contact.deadline) * 100;
-            contracts.Add(contact);
+            ContractScriptableObject contract = ContractScriptableObject.CreateInstance<ContractScriptableObject>();
+            contract.contractName = contractNames[Random.Range(0, contractNames.Length)];
+            contract.destination = otherStations[Random.Range(0, otherStations.Count)];
+            contract.deadline = Random.Range(3, 12);
+            contract.payment = 1500 - Mathf.FloorToInt(contract.deadline) * 100;
+            contracts.Add(contract);
         }
     }
 
@@ -43,7 +46,7 @@ public class StationController : MonoBehaviour
     {
     }
 
-    void HandleAcceptContract(ContractScriptableObject acceptedContract)
+    void HandleAssignedContract(ContractScriptableObject acceptedContract, SpaceshipController spaceship)
     {
         contracts.Remove(acceptedContract);
     }

@@ -33,7 +33,11 @@ public class SpaceshipController : MonoBehaviour
 
     private Rigidbody body;
 
-    private ContractScriptableObject activeContract;
+    public ContractScriptableObject activeContract
+    {
+        get;
+        private set;
+    }
 
     private State state = State.Idle;
     private Direction direction = Direction.None;
@@ -46,8 +50,6 @@ public class SpaceshipController : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody>();
-        _contractChannel.AssignContractAction += HandleAssignContract;
-        channel.DockAction += HandleDocked;
         channel.UndockAction += HandleUndocked;
         channel.RefuelAction += HandleRefuel;
 
@@ -105,7 +107,7 @@ public class SpaceshipController : MonoBehaviour
                         gameObject.transform.position = location.transform.position;
                         body.velocity = new Vector3(0, 0, 0);
                         body.drag = 0;
-                        channel.Docked(location);
+                        channel.Docked(this, location);
                     }
                     break;
                 }
@@ -135,50 +137,42 @@ public class SpaceshipController : MonoBehaviour
         }
     }
 
-    void HandleDocked(StationController station)
-    {
-        if (activeContract != null)
-        {
-            if (activeContract.destination == station)
-            {
-                Debug.Log("Contract completed");
-                // TODO Use Event
-                gameplayStatistics.contractsCompleted += 1;
-                properties.credits += activeContract.payment;
-                activeContract = null;
-
-                if (station.contracts.Count == 0)
-                {
-                    Debug.Log("Station has no contracts, game over");
-                    gameOverChannel.RaiseEvent();
-                }
-            }
-            else
-            {
-                Debug.Log("Incorrect station for contract");
-            }
-        }
-        else
-        {
-            Debug.Log("No active contract");
-        }
-    }
 
     void HandleUndocked()
     {
         state = State.Idle;
     }
 
-    void HandleAssignContract(ContractScriptableObject contract, SpaceshipController spaceship)
+    public bool AssignContract(ContractScriptableObject contract)
     {
-        if (spaceship == this)
+        var assigned = false;
+        if (activeContract == null)
         {
-            Debug.Log("Spaceship Accepted Contract");
+            Debug.Log("Spaceship Assigned Contract");
             activeContract = contract;
             location = null;
             transform.LookAt(activeContract.destination.gameObject.transform);
+            assigned = true;
         }
+
+        return assigned;
     }
+
+    public void CompleteContract(ContractScriptableObject contract)
+    {
+        Debug.AssertFormat(activeContract && activeContract == contract, "Attempted to complete invalid contract");
+        activeContract = null;
+        gameplayStatistics.contractsCompleted += 1;
+        properties.credits += activeContract.payment;
+    }
+
+    public void FailContract(ContractChannelSO contract)
+    {
+        Debug.AssertFormat(activeContract && activeContract == contract, "Attempted to fail invalid contract");
+        activeContract = null;
+        // gameplayStatistics.contractsFailed += 1;
+    }
+
 
     void HandleRefuel(float amount)
     {

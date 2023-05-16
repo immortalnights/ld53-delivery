@@ -4,47 +4,48 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] private HudController hud;
-    [SerializeField] private StationUIController stationPanel;
-    [SerializeField] private GameOverPanelController gameOverPanel;
+    [SerializeField] private HudController _hudPanel;
+    [SerializeField] private StationUIController _stationPanel;
+    [SerializeField] private GameOverPanelController _gameOverPanel;
 
     [Header("Listening to")]
-    [SerializeField] private SpaceshipChannelSO _spaceshipChannel = default;
-    [SerializeField] private VoidEventChannelSO gameOverChannel = default;
+    [SerializeField] private SpaceshipChannelSO _spaceshipChannel;
+    [SerializeField] private VoidEventChannelSO _gameOverEvent;
 
     // Start is called before the first frame update
     void Start()
     {
         _spaceshipChannel.DockAction += HandleSpaceshipDocked;
         _spaceshipChannel.UndockAction += HandleSpaceshipUndocked;
-        gameOverChannel.OnEventRaised += HandleGameOver;
+        _gameOverEvent.OnEventRaised += HandleGameOver;
 
-        hud.gameObject.SetActive(true);
-        stationPanel.gameObject.SetActive(false);
-        gameOverPanel.gameObject.SetActive(false);
+        _hudPanel.gameObject.SetActive(true);
+        _stationPanel.gameObject.SetActive(false);
+        _gameOverPanel.gameObject.SetActive(false);
     }
 
-    private void HandleSpaceshipDocked(StationController station)
+    private void HandleSpaceshipDocked(SpaceshipController spaceship, StationController station)
     {
         if (station.contracts.Count == 0)
         {
-            gameOverPanel.gameObject.SetActive(true);
+            _gameOverPanel.gameObject.SetActive(true);
         }
         else
         {
-            stationPanel.SetStation(station);
+            _stationPanel.SetStation(station);
         }
     }
 
     private void HandleSpaceshipUndocked()
     {
-        stationPanel.ClearStation();
-        stationPanel.gameObject.SetActive(false);
-        hud.gameObject.SetActive(true);
+        _stationPanel.ClearStation();
+        _stationPanel.gameObject.SetActive(false);
+        _hudPanel.gameObject.SetActive(true);
     }
 
     private void HandleGameOver()
     {
         gameObject.SetActive(true);
+        _gameOverPanel.gameObject.SetActive(false);
     }
 }
