@@ -3608,6 +3608,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stationScreenChannel: {fileID: 11400000, guid: 84443cc43e16daa469b36baa8f0fe67a, type: 2}
   _spaceshipChannel: {fileID: 11400000, guid: d4498d5dbb536074ca9915a05bbd6f5f, type: 2}
+  _undockButton: {fileID: 1696708400}
+  _contractChannel: {fileID: 11400000, guid: ac3f7d36d13d1c248a7324d188dcd3d7, type: 2}
 --- !u!1 &774049166
 GameObject:
   m_ObjectHideFlags: 0
