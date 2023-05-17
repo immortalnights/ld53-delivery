@@ -6,10 +6,10 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Events/Station Screen Channel")]
 public class StationScreenChannelSO : ScriptableObject
 {
-  public event UnityAction<Screen> ChangeScreenAction = default;
+    public event UnityAction<StationScreen> ChangeScreenAction = default;
 
-  public void Invoke(Screen screen)
-  {
-    ChangeScreenAction.Invoke(screen);
-  }
+    public void Invoke(StationScreen screen)
+    {
+        ChangeScreenAction.Invoke(screen);
+    }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Screen
+public enum StationScreen
 {
     None,
     Root,
@@ -12,7 +12,7 @@ public enum Screen
 
 public class StationUIController : MonoBehaviour
 {
-    [SerializeField] private Screen display = Screen.None;
+    [SerializeField] private StationScreen display = StationScreen.None;
 
     [SerializeField] private RootUIController rootScreen;
     [SerializeField] private FuelUIController fuelScreen;
@@ -35,13 +35,13 @@ public class StationUIController : MonoBehaviour
         ChangeScreen(display);
     }
 
-    private void ChangeScreen(Screen to)
+    private void ChangeScreen(StationScreen to)
     {
         display = to;
 
         switch (display)
         {
-            case Screen.None:
+            case StationScreen.None:
                 {
                     gameObject.SetActive(false);
                     rootScreen.gameObject.SetActive(true);
@@ -49,7 +49,7 @@ public class StationUIController : MonoBehaviour
                     fuelScreen.gameObject.SetActive(false);
                     break;
                 }
-            case Screen.Root:
+            case StationScreen.Root:
                 {
                     gameObject.SetActive(true);
                     rootScreen.gameObject.SetActive(true);
@@ -57,7 +57,7 @@ public class StationUIController : MonoBehaviour
                     fuelScreen.gameObject.SetActive(false);
                     break;
                 }
-            case Screen.Contract:
+            case StationScreen.Contract:
                 {
                     if (_station)
                     {
@@ -70,7 +70,7 @@ public class StationUIController : MonoBehaviour
                     fuelScreen.gameObject.SetActive(false);
                     break;
                 }
-            case Screen.Fuel:
+            case StationScreen.Fuel:
                 {
                     gameObject.SetActive(true);
                     rootScreen.gameObject.SetActive(false);
@@ -84,13 +84,13 @@ public class StationUIController : MonoBehaviour
     public void SetStation(StationController s)
     {
         _station = s;
-        ChangeScreen(Screen.Root);
+        ChangeScreen(StationScreen.Root);
     }
 
     public void ClearStation()
     {
         _station = null;
-        ChangeScreen(Screen.None);
+        ChangeScreen(StationScreen.None);
     }
 
     void HandleAssignedContract(ContractScriptableObject contract, SpaceshipController spaceship)

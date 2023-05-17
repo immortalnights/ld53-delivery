@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class UIController : MonoBehaviour
 {
     [SerializeField] private HudController _hudPanel;
@@ -24,27 +25,23 @@ public class UIController : MonoBehaviour
         _gameOverPanel.gameObject.SetActive(false);
     }
 
+
     private void HandleSpaceshipDocked(SpaceshipController spaceship, StationController station)
     {
-        if (station.contracts.Count == 0)
-        {
-            _gameOverPanel.gameObject.SetActive(true);
-        }
-        else
-        {
-            _stationPanel.SetStation(station);
-        }
+        _hudPanel.Hide();
+        _stationPanel.SetStation(station);
     }
 
     private void HandleSpaceshipUndocked()
     {
         _stationPanel.ClearStation();
         _stationPanel.gameObject.SetActive(false);
-        _hudPanel.gameObject.SetActive(true);
+        _hudPanel.Show();
     }
 
     private void HandleGameOver()
     {
+        _hudPanel.Hide();
         gameObject.SetActive(true);
         _gameOverPanel.gameObject.SetActive(false);
     }

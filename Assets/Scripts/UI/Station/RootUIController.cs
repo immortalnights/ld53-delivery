@@ -18,17 +18,16 @@ public class RootUIController : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("enable?");
     }
 
     public void OnClickContract()
     {
-        _stationScreenChannel.Invoke(Screen.Contract);
+        _stationScreenChannel.Invoke(StationScreen.Contract);
     }
 
     public void OnClickFuel()
     {
-        _stationScreenChannel.Invoke(Screen.Fuel);
+        _stationScreenChannel.Invoke(StationScreen.Fuel);
     }
 
     public void OnClickUndock()

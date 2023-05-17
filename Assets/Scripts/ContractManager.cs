@@ -10,6 +10,8 @@ public class ContractManager : MonoBehaviour
 
     [SerializeField] private SpaceshipChannelSO _spaceshipChannel;
 
+    [SerializeField] private NotificationChannelSO _notificationChannel;
+
     private GameManager _gameManager;
 
     // Start is called before the first frame update
@@ -38,11 +40,12 @@ public class ContractManager : MonoBehaviour
                 var currentTime = _gameManager.Date.AddHours(contract.deadline);
                 if (currentTime <= deadline)
                 {
-                    Debug.Log("Contract completed");
+                    _notificationChannel.Send("Contract completed");
                     _contractChannel.CompleteContract(contract, spaceship, station);
                 }
                 else
                 {
+                    _notificationChannel.Send("Contract failed");
                     _contractChannel.FailContract(contract, spaceship);
                 }
             }

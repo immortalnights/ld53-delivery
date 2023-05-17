@@ -43,4 +43,14 @@ public class HudController : MonoBehaviour
         creditsValue.text = spaceshipProperties.credits.ToString();
         fuelValue.text = Mathf.FloorToInt(spaceshipProperties.fuel).ToString();
     }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(true);
+    }
 }

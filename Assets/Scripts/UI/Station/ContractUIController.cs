@@ -59,6 +59,6 @@ public class ContractUIController : MonoBehaviour
 
     public void HandleClose()
     {
-        stationScreenChannel.Invoke(Screen.Root);
+        stationScreenChannel.Invoke(StationScreen.Root);
     }
 }
