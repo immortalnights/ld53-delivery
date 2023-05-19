@@ -6,6 +6,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private UniverseTimeSO _universeTime;
+    [SerializeField] public GameplayStatisticsSO gameplayStatistics;
+    [SerializeField] public PlayerPropertiesSO playerProperties;
 
     private ContractManager _contractManager;
 

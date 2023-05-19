@@ -589,9 +589,9 @@ MonoBehaviour:
   creditsValue: {fileID: 505221319}
   fuelValue: {fileID: 1661866481}
   speedValue: {fileID: 603269762}
-  universeTime: {fileID: 11400000, guid: 887453536a524a448a5b292290c519cd, type: 2}
-  spaceshipProperties: {fileID: 11400000, guid: ee0a93af49895104293d84bcf993bf46, type: 2}
-  _notificationChannel: {fileID: 11400000, guid: fecbd4cfd49b2c2428d3b3463d7ee918, type: 2}
+  _universeTime: {fileID: 11400000, guid: 887453536a524a448a5b292290c519cd, type: 2}
+  _playerProperties: {fileID: 11400000, guid: 1ec0d320f9ce86145a3ebe9f91e328e4, type: 2}
+  _spaceshipProperties: {fileID: 11400000, guid: ee0a93af49895104293d84bcf993bf46, type: 2}
 --- !u!1 &163070436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,7 +1142,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   engine: {fileID: 11400000, guid: 2b3d4131a3a38f94bba144d638dbe695, type: 2}
   properties: {fileID: 11400000, guid: ee0a93af49895104293d84bcf993bf46, type: 2}
-  gameplayStatistics: {fileID: 11400000, guid: adb2569c7c48f3f4e8043354057b082a, type: 2}
   channel: {fileID: 11400000, guid: d4498d5dbb536074ca9915a05bbd6f5f, type: 2}
   _contractChannel: {fileID: 11400000, guid: ac3f7d36d13d1c248a7324d188dcd3d7, type: 2}
   gameOverChannel: {fileID: 11400000, guid: 66a83ab05d1bf1a4b85cabfe614691f6, type: 2}
@@ -1688,6 +1687,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _universeTime: {fileID: 11400000, guid: 887453536a524a448a5b292290c519cd, type: 2}
+  gameplayStatistics: {fileID: 11400000, guid: adb2569c7c48f3f4e8043354057b082a, type: 2}
+  playerProperties: {fileID: 11400000, guid: 1ec0d320f9ce86145a3ebe9f91e328e4, type: 2}
 --- !u!4 &497839793
 Transform:
   m_ObjectHideFlags: 0
@@ -4950,8 +4951,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f753723b878121a49977e3bac806f03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stationScreenChannel: {fileID: 11400000, guid: 84443cc43e16daa469b36baa8f0fe67a, type: 2}
-  spaceshipChannel: {fileID: 11400000, guid: d4498d5dbb536074ca9915a05bbd6f5f, type: 2}
+  _stationScreenChannel: {fileID: 11400000, guid: 84443cc43e16daa469b36baa8f0fe67a, type: 2}
+  _spaceshipChannel: {fileID: 11400000, guid: d4498d5dbb536074ca9915a05bbd6f5f, type: 2}
+  _spaceshipProperties: {fileID: 11400000, guid: ee0a93af49895104293d84bcf993bf46, type: 2}
 --- !u!1 &1115875533
 GameObject:
   m_ObjectHideFlags: 0
@@ -6502,8 +6504,9 @@ MonoBehaviour:
   contractsField: {fileID: 1604717659}
   distanceField: {fileID: 909415878}
   fuelField: {fileID: 1673859416}
-  spaceshipProperties: {fileID: 11400000, guid: ee0a93af49895104293d84bcf993bf46, type: 2}
-  gameplayStatistics: {fileID: 11400000, guid: adb2569c7c48f3f4e8043354057b082a, type: 2}
+  _playerProperties: {fileID: 11400000, guid: 1ec0d320f9ce86145a3ebe9f91e328e4, type: 2}
+  _gameplayStatistics: {fileID: 11400000, guid: adb2569c7c48f3f4e8043354057b082a, type: 2}
+  _spaceshipProperties: {fileID: 11400000, guid: ee0a93af49895104293d84bcf993bf46, type: 2}
 --- !u!224 &1510621352
 RectTransform:
   m_ObjectHideFlags: 0

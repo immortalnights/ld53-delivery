@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0c340d27192b4943b8b70cd3dcf3699, type: 3}
-  m_Name: Universe Time
+  m_Script: {fileID: 11500000, guid: acbf8b02fb9bb50409a98836e3977418, type: 3}
+  m_Name: Default Gameplay Statistics
   m_EditorClassIdentifier: 
+  contractsCompleted: 0
+  distanceTraveled: 0
+  fuelConsumed: 0

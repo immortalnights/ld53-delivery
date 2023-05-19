@@ -9,7 +9,7 @@ public class SpaceshipChannelSO : ScriptableObject
     public event UnityAction<SpaceshipController, StationController> DockAction;
     public event UnityAction UndockAction;
 
-    public event UnityAction<float> RefuelAction;
+    public event UnityAction<int> RefuelAction;
 
     // Invoked when the Spaceship (player) docks at a station
     public void Docked(SpaceshipController spaceship, StationController station)
@@ -28,7 +28,7 @@ public class SpaceshipChannelSO : ScriptableObject
         }
     }
 
-    public void Refuel(float amount)
+    public void Refuel(int amount)
     {
         if (RefuelAction != null)
         {

@@ -12,9 +12,11 @@ public class HudController : MonoBehaviour
 
     private SpaceshipController spaceship;
 
-    [SerializeField] private UniverseTimeSO universeTime = default;
+    [SerializeField] private UniverseTimeSO _universeTime;
 
-    [SerializeField] private SpaceshipPropertiesSO spaceshipProperties;
+    [SerializeField] private PlayerPropertiesSO _playerProperties;
+
+    [SerializeField] private SpaceshipPropertiesSO _spaceshipProperties;
 
     void Start()
     {
@@ -24,7 +26,7 @@ public class HudController : MonoBehaviour
 
     void Update()
     {
-        dateValue.text = universeTime.Format();
+        dateValue.text = _universeTime.Format();
         speedValue.text = spaceship.Speed.ToString();
 
         if (spaceship.Speed == 0)
@@ -40,8 +42,8 @@ public class HudController : MonoBehaviour
             speedValue.color = Color.red;
         }
 
-        creditsValue.text = spaceshipProperties.credits.ToString();
-        fuelValue.text = Mathf.FloorToInt(spaceshipProperties.fuel).ToString();
+        creditsValue.text = _playerProperties.credits.ToString();
+        fuelValue.text = Mathf.FloorToInt(_spaceshipProperties.fuel).ToString();
     }
 
     public void Show()

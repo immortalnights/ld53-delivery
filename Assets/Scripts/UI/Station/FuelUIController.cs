@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class FuelUIController : MonoBehaviour
 {
-    [SerializeField] private StationScreenChannelSO stationScreenChannel;
-    [SerializeField] private SpaceshipChannelSO spaceshipChannel;
+    [SerializeField] private StationScreenChannelSO _stationScreenChannel;
+    [SerializeField] private SpaceshipChannelSO _spaceshipChannel;
+    [SerializeField] private SpaceshipPropertiesSO _spaceshipProperties;
 
     public void HandleBuyQuarter()
     {
-        spaceshipChannel.Refuel(0.25f);
+        _spaceshipChannel.Refuel(Mathf.FloorToInt(_spaceshipProperties.maximumFuel * 0.25f));
     }
     public void HandleBuyHalf()
     {
-        spaceshipChannel.Refuel(0.5f);
+        _spaceshipChannel.Refuel(Mathf.FloorToInt(_spaceshipProperties.maximumFuel * 0.5f));
     }
     public void HandleBuyMaximum()
     {
-        spaceshipChannel.Refuel(1f);
+        _spaceshipChannel.Refuel(Mathf.FloorToInt(_spaceshipProperties.maximumFuel * 1f));
     }
 
     public void HandleClose()
     {
-        stationScreenChannel.Invoke(StationScreen.Root);
+        _stationScreenChannel.Invoke(StationScreen.Root);
     }
 }

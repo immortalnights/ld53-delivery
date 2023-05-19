@@ -93,7 +93,7 @@ public class StationUIController : MonoBehaviour
         ChangeScreen(StationScreen.None);
     }
 
-    void HandleAssignedContract(ContractScriptableObject contract, SpaceshipController spaceship)
+    void HandleAssignedContract(ContractSO contract, SpaceshipController spaceship)
     {
         // Re-render contract board
         contractScreen.RenderContracts(_station.contracts);

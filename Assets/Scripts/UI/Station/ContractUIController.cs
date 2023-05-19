@@ -34,14 +34,13 @@ public class ContractUIController : MonoBehaviour
         ClearContracts();
     }
 
-    public void RenderContracts(List<ContractScriptableObject> contracts)
+    public void RenderContracts(List<ContractSO> contracts)
     {
         Debug.LogFormat("Render {0} contracts", contracts.Count);
 
         ClearContracts();
-        foreach (ContractScriptableObject contract in contracts)
+        foreach (ContractSO contract in contracts)
         {
-            Debug.Log("Create contract UI");
             GameObject obj = Instantiate(_contractItemPrefab, scrollViewContent);
             ContractItem ui = obj.GetComponent<ContractItem>();
             ui._contractChannel = _contractChannel;

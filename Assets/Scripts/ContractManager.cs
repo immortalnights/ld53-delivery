@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class ContractManager : MonoBehaviour
 {
-
     [SerializeField] private ContractChannelSO _contractChannel;
 
     [SerializeField] private SpaceshipChannelSO _spaceshipChannel;
@@ -36,11 +35,20 @@ public class ContractManager : MonoBehaviour
         {
             if (contract.destination == station)
             {
-                var deadline = contract.acceptedTime.Date.AddHours(contract.deadline);
-                var currentTime = _gameManager.Date.AddHours(contract.deadline);
+                var deadline = contract.acceptedTime.AddHours(contract.deadline);
+                var currentTime = _gameManager.Date;
+                Debug.LogFormat("Accepted {0}; Current {1}; Deadline {2} ({3})",
+                    contract.acceptedTime,
+                    currentTime,
+                    deadline,
+                    contract.deadline
+                );
                 if (currentTime <= deadline)
                 {
-                    _notificationChannel.Send("Contract completed");
+                    _gameManager.playerProperties.credits += contract.payment;
+                    _gameManager.gameplayStatistics.contractsCompleted += 1;
+
+                    _notificationChannel.Send(string.Format("Contract completed\nPayment {0}", contract.payment));
                     _contractChannel.CompleteContract(contract, spaceship, station);
                 }
                 else
@@ -60,9 +68,14 @@ public class ContractManager : MonoBehaviour
         }
     }
 
-    public void AcceptContract(ContractScriptableObject contract)
+    public void AcceptContract(ContractSO contract)
     {
         contract.acceptedTime = _gameManager.Date;
+
+        Debug.LogFormat("Accepted at {0}; Deadline at {1}",
+            contract.acceptedTime,
+            contract.acceptedTime.AddHours(contract.deadline)
+        );
 
         // Always assign to the default spaceship
         var spaceship = GameObject.FindFirstObjectByType<SpaceshipController>();

@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cb83956777bcf542b88f0b41201b18e, type: 3}
-  m_Name: DefaultGameplayStatistics
+  m_Script: {fileID: 11500000, guid: a52f7df8e0c725c4ea9526a5f1a518f8, type: 3}
+  m_Name: Default Player Properties
   m_EditorClassIdentifier: 
-  contractsCompleted: 0
-  distanceTraveled: 0
-  fuelConsumed: 0
+  credits: 1000

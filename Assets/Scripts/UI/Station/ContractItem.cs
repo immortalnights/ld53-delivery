@@ -6,7 +6,7 @@ using TMPro;
 
 public class ContractItem : MonoBehaviour
 {
-    public ContractScriptableObject contract
+    public ContractSO contract
     {
         get;
         private set;
@@ -41,7 +41,7 @@ public class ContractItem : MonoBehaviour
         _contractChannel.AcceptContract(contract);
     }
 
-    public void SetContract(ContractScriptableObject newContract)
+    public void SetContract(ContractSO newContract)
     {
         contract = newContract;
         RenderContract();

@@ -6,7 +6,7 @@ public class StationController : MonoBehaviour
 {
     [SerializeField] private ContractChannelSO _contractChannel;
 
-    public List<ContractScriptableObject> contracts
+    public List<ContractSO> contracts
     {
         get;
         private set;
@@ -14,7 +14,7 @@ public class StationController : MonoBehaviour
 
     void Start()
     {
-        contracts = new List<ContractScriptableObject>();
+        contracts = new List<ContractSO>();
         _contractChannel.AssignedContractAction += HandleAssignedContract;
 
         List<StationController> otherStations = new List<StationController>(FindObjectsOfType<StationController>());
@@ -33,11 +33,11 @@ public class StationController : MonoBehaviour
         const int contractCount = 5;
         for (int i = 0; i < contractCount; i++)
         {
-            ContractScriptableObject contract = ContractScriptableObject.CreateInstance<ContractScriptableObject>();
+            ContractSO contract = ContractSO.CreateInstance<ContractSO>();
             contract.contractName = contractNames[Random.Range(0, contractNames.Length)];
             contract.destination = otherStations[Random.Range(0, otherStations.Count)];
-            contract.deadline = Random.Range(3, 12);
-            contract.payment = 1500 - Mathf.FloorToInt(contract.deadline) * 100;
+            contract.deadline = Random.Range(8, 24);
+            contract.payment = 1500 + Mathf.FloorToInt(contract.deadline) * 100;
             contracts.Add(contract);
         }
     }
@@ -46,7 +46,7 @@ public class StationController : MonoBehaviour
     {
     }
 
-    void HandleAssignedContract(ContractScriptableObject acceptedContract, SpaceshipController spaceship)
+    void HandleAssignedContract(ContractSO acceptedContract, SpaceshipController spaceship)
     {
         contracts.Remove(acceptedContract);
     }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Contract")]
-public class ContractScriptableObject : ScriptableObject
+public class ContractSO : ScriptableObject
 {
     public string contractName;
     public StationController destination;

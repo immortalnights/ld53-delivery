@@ -23,8 +23,6 @@ public class SpaceshipController : MonoBehaviour
     [SerializeField] private EngineScriptableObject engine;
     [SerializeField] private SpaceshipPropertiesSO properties;
 
-    [SerializeField] private GameplayStatisticsSO gameplayStatistics;
-
     [Header("Listening to...")]
     [SerializeField] private SpaceshipChannelSO channel;
     [SerializeField] private ContractChannelSO _contractChannel;
@@ -33,7 +31,7 @@ public class SpaceshipController : MonoBehaviour
 
     private Rigidbody body;
 
-    public ContractScriptableObject activeContract
+    public ContractSO activeContract
     {
         get;
         private set;
@@ -54,7 +52,6 @@ public class SpaceshipController : MonoBehaviour
         channel.RefuelAction += HandleRefuel;
 
         properties.Reset();
-        gameplayStatistics.Reset();
 
         StationController[] stations = FindObjectsOfType<StationController>();
         foreach (StationController station in stations)
@@ -143,7 +140,7 @@ public class SpaceshipController : MonoBehaviour
         state = State.Idle;
     }
 
-    public bool AssignContract(ContractScriptableObject contract)
+    public bool AssignContract(ContractSO contract)
     {
         var assigned = false;
         if (activeContract == null)
@@ -154,42 +151,47 @@ public class SpaceshipController : MonoBehaviour
             transform.LookAt(activeContract.destination.gameObject.transform);
             assigned = true;
         }
+        else
+        {
+            Debug.LogWarning("Failed to assign contract, contract in progress");
+        }
 
         return assigned;
     }
 
-    public void CompleteContract(ContractScriptableObject contract)
+    public void CompleteContract(ContractSO contract)
     {
         Debug.AssertFormat(activeContract && activeContract == contract, "Attempted to complete invalid contract");
         activeContract = null;
-        gameplayStatistics.contractsCompleted += 1;
-        properties.credits += activeContract.payment;
+        Debug.Log("Contract completed");
     }
 
     public void FailContract(ContractChannelSO contract)
     {
         Debug.AssertFormat(activeContract && activeContract == contract, "Attempted to fail invalid contract");
         activeContract = null;
-        // gameplayStatistics.contractsFailed += 1;
+        Debug.Log("Contract failed");
     }
 
 
-    void HandleRefuel(float amount)
+    void HandleRefuel(int amount)
     {
-        const int fuelUnitCost = 1;
+        properties.fuel += Mathf.Min(properties.fuel + amount, properties.maximumFuel);
 
-        Debug.LogFormat("refuelRequested {0}", amount);
-        float refuelRequired = Mathf.Min(properties.maximumFuel * amount, properties.maximumFuel - properties.fuel);
-        Debug.LogFormat("refuelRequired {0}", refuelRequired);
-        float canAfford = Mathf.Floor(properties.credits / fuelUnitCost);
-        Debug.LogFormat("canAfford {0}", canAfford);
-        float refuelAmount = Mathf.Min(canAfford, refuelRequired);
-        Debug.LogFormat("refuelAmount {0}", refuelAmount);
+        // const int fuelUnitCost = 1;
 
-        Debug.LogFormat("current fuel {0}", properties.fuel);
-        properties.credits -= Mathf.CeilToInt(refuelAmount * fuelUnitCost);
-        properties.fuel += refuelAmount;
-        Debug.LogFormat("fuel {0}", properties.fuel);
+        // Debug.LogFormat("refuelRequested {0}", amount);
+        // float refuelRequired = Mathf.Min(properties.maximumFuel * amount, properties.maximumFuel - properties.fuel);
+        // Debug.LogFormat("refuelRequired {0}", refuelRequired);
+        // float canAfford = Mathf.Floor(properties.credits / fuelUnitCost);
+        // Debug.LogFormat("canAfford {0}", canAfford);
+        // float refuelAmount = Mathf.Min(canAfford, refuelRequired);
+        // Debug.LogFormat("refuelAmount {0}", refuelAmount);
+
+        // Debug.LogFormat("current fuel {0}", properties.fuel);
+        // properties.credits -= Mathf.CeilToInt(refuelAmount * fuelUnitCost);
+        // properties.fuel += refuelAmount;
+        // Debug.LogFormat("fuel {0}", properties.fuel);
         // TODO some UI notification
     }
 
@@ -203,23 +205,23 @@ public class SpaceshipController : MonoBehaviour
             location = station;
             body.drag = body.velocity.magnitude / 4;
 
-            float dockingSpeed = body.velocity.magnitude;
-            if (dockingSpeed > 100f)
-            {
-                properties.credits -= 1000;
-            }
-            else if (dockingSpeed > 100f)
-            {
-                properties.credits -= 500;
-            }
-            else if (dockingSpeed > 50f)
-            {
-                properties.credits -= 250;
-            }
-            else if (dockingSpeed > 10f)
-            {
-                properties.credits -= 100;
-            }
+            // float dockingSpeed = body.velocity.magnitude;
+            // if (dockingSpeed > 100f)
+            // {
+            //     properties.credits -= 1000;
+            // }
+            // else if (dockingSpeed > 100f)
+            // {
+            //     properties.credits -= 500;
+            // }
+            // else if (dockingSpeed > 50f)
+            // {
+            //     properties.credits -= 250;
+            // }
+            // else if (dockingSpeed > 10f)
+            // {
+            //     properties.credits -= 100;
+            // }
         }
     }
 
