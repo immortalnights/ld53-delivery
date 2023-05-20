@@ -50,9 +50,9 @@ public class ContractItem : MonoBehaviour
     private void RenderContract()
     {
         nameField.text = contract.contractName;
-        if (contract.destination)
+        if (contract.dropOffLocation)
         {
-            destinationField.text = contract.destination.name;
+            destinationField.text = contract.dropOffLocation.name;
         }
         paymentField.text = contract.payment.ToString();
         deadlineField.text = contract.deadline.ToString() + " Days";

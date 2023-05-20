@@ -148,7 +148,7 @@ public class SpaceshipController : MonoBehaviour
             Debug.Log("Spaceship Assigned Contract");
             activeContract = contract;
             location = null;
-            transform.LookAt(activeContract.destination.gameObject.transform);
+            transform.LookAt(activeContract.dropOffLocation.gameObject.transform);
             assigned = true;
         }
         else
@@ -159,18 +159,9 @@ public class SpaceshipController : MonoBehaviour
         return assigned;
     }
 
-    public void CompleteContract(ContractSO contract)
+    public void ClearContract()
     {
-        Debug.AssertFormat(activeContract && activeContract == contract, "Attempted to complete invalid contract");
         activeContract = null;
-        Debug.Log("Contract completed");
-    }
-
-    public void FailContract(ContractChannelSO contract)
-    {
-        Debug.AssertFormat(activeContract && activeContract == contract, "Attempted to fail invalid contract");
-        activeContract = null;
-        Debug.Log("Contract failed");
     }
 
 

@@ -20,30 +20,26 @@ public class StationController : MonoBehaviour
         List<StationController> otherStations = new List<StationController>(FindObjectsOfType<StationController>());
         otherStations.Remove(this);
 
-        string[] contractNames = new string[] {
-            "Personal Transport",
-            "Passenger Transport",
-            "Resource Delivery",
-            "Mining Equipment Transport",
-            "Electronics Delivery",
-            "Military Hardware Delivery",
-            "Confidential Cargo",
-        };
-
         const int contractCount = 5;
         for (int i = 0; i < contractCount; i++)
         {
-            ContractSO contract = ContractSO.CreateInstance<ContractSO>();
-            contract.contractName = contractNames[Random.Range(0, contractNames.Length)];
-            contract.destination = otherStations[Random.Range(0, otherStations.Count)];
-            contract.deadline = Random.Range(8, 24);
-            contract.payment = 1500 + Mathf.FloorToInt(contract.deadline) * 100;
-            contracts.Add(contract);
+            contracts.Add(ContractSO.GenerateContract(this));
         }
     }
 
     void Update()
     {
+    }
+
+    public static StationController GetRandomStation(StationController exclude = null)
+    {
+        List<StationController> otherStations = new List<StationController>(FindObjectsOfType<StationController>());
+        if (exclude != null)
+        {
+            otherStations.Remove(exclude);
+        }
+
+        return otherStations[Random.Range(0, otherStations.Count)];
     }
 
     void HandleAssignedContract(ContractSO acceptedContract, SpaceshipController spaceship)

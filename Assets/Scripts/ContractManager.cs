@@ -24,7 +24,6 @@ public class ContractManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     void HandleSpaceshipDocked(SpaceshipController spaceship, StationController station)
@@ -33,7 +32,7 @@ public class ContractManager : MonoBehaviour
 
         if (contract != null)
         {
-            if (contract.destination == station)
+            if (contract.dropOffLocation == station)
             {
                 var deadline = contract.acceptedTime.AddHours(contract.deadline);
                 var currentTime = _gameManager.Date;
@@ -43,6 +42,7 @@ public class ContractManager : MonoBehaviour
                     deadline,
                     contract.deadline
                 );
+
                 if (currentTime <= deadline)
                 {
                     _gameManager.playerProperties.credits += contract.payment;
@@ -56,6 +56,8 @@ public class ContractManager : MonoBehaviour
                     _notificationChannel.Send("Contract failed");
                     _contractChannel.FailContract(contract, spaceship);
                 }
+
+                spaceship.ClearContract();
             }
             else
             {
@@ -84,5 +86,4 @@ public class ContractManager : MonoBehaviour
             _contractChannel.AssignContract(contract, spaceship);
         }
     }
-
 }
